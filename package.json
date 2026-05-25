@@ -1,0 +1,26 @@
+{
+  "name": "ai-resume-and-job-application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "python -m http.server 4174 --bind 127.0.0.1",
+    "check": "node --check app.js && node --check supabase-client.js",
+    "test": "npm run check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arimiya/AI-job-application.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Arimiya/AI-job-application/issues"
+  },
+  "homepage": "https://github.com/Arimiya/AI-job-application#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.106.2"
+  }
+}

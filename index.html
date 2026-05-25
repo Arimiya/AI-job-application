@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CareerAI Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <section class="auth-screen view" id="view-signup" aria-labelledby="signupTitle">
+      <div class="auth-visual signup-visual">
+        <a class="auth-brand" href="#signup" data-view-link="signup">
+          <span class="brand-icon" aria-hidden="true">AI</span>
+          <span>CareerAI</span>
+        </a>
+        <div class="auth-art auth-art-signup" aria-hidden="true">
+          <span class="spark spark-one"></span>
+          <span class="spark spark-two"></span>
+          <span class="spark spark-three"></span>
+          <div class="art-card resume-card">
+            <span class="badge">SMART</span>
+            <span class="line wide"></span>
+            <span class="line"></span>
+          </div>
+          <div class="art-card person-card">
+            <span class="avatar-dot"></span>
+            <span class="avatar-body"></span>
+          </div>
+          <div class="paper-card">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      <div class="auth-content">
+        <div class="auth-card">
+          <h2 id="signupTitle">Create your account</h2>
+          <p>Start your journey to your dream job</p>
+
+          <button class="oauth-button" type="button" id="googleSignupButton">
+            <span class="google-dot" aria-hidden="true">G</span>
+            Sign up with Google
+          </button>
+          <button class="primary-action auth-main-button" type="button" id="showEmailSignupButton">
+            Sign up with Email
+          </button>
+
+          <form class="auth-form hidden" id="signupForm">
+            <label>
+              Full name
+              <input id="signupNameInput" type="text" autocomplete="name" placeholder="John Carter" />
+            </label>
+            <label>
+              Email address
+              <input id="signupEmailInput" type="email" autocomplete="email" placeholder="john@example.com" required />
+            </label>
+            <label>
+              Password
+              <input id="signupPasswordInput" type="password" autocomplete="new-password" placeholder="Create a password" required />
+            </label>
+            <button class="primary-action" type="submit">Create Account</button>
+          </form>
+
+          <p class="auth-switch">Already have an account? <button type="button" data-view-link="login">Log in</button></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="auth-screen view" id="view-login" aria-labelledby="loginTitle">
+      <div class="auth-visual login-visual">
+        <a class="auth-brand" href="#login" data-view-link="login">
+          <span class="brand-icon" aria-hidden="true">AI</span>
+          <span>CareerAI</span>
+        </a>
+        <div class="auth-art auth-art-login" aria-hidden="true">
+          <span class="spark spark-one"></span>
+          <span class="spark spark-two"></span>
+          <span class="spark spark-three"></span>
+          <div class="art-card login-card-art">
+            <span class="line wide"></span>
+            <span class="line"></span>
+            <span class="line short"></span>
+          </div>
+          <div class="art-card lock-card"></div>
+          <div class="lock-badge"></div>
+          <div class="folder-card"></div>
+        </div>
+      </div>
+      <div class="auth-content">
+        <form class="auth-card" id="loginForm">
+          <h2 id="loginTitle">Welcome back</h2>
+          <p>Log in to your account</p>
+
+          <label>
+            Email Address
+            <input id="loginEmailInput" type="email" autocomplete="email" placeholder="john@example.com" required />
+          </label>
+          <label>
+            <span class="label-row">
+              Password
+              <button class="inline-link" type="button" id="forgotPasswordButton">Forgot password?</button>
+            </span>
+            <input id="loginPasswordInput" type="password" autocomplete="current-password" required />
+          </label>
+          <button class="primary-action" type="submit">Log In</button>
+          <p class="auth-switch">Don't have an account? <button type="button" data-view-link="signup">Sign up</button></p>
+        </form>
+      </div>
+    </section>
+
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Primary navigation">
+        <div class="brand-row">
+          <div class="brand-mark" aria-hidden="true">4</div>
+          <h1>Dashboard</h1>
+        </div>
+
+        <a class="brand-lockup" href="#dashboard" data-view-link="dashboard">
+          <span class="brand-icon" aria-hidden="true">AI</span>
+          <span>CareerAI</span>
+        </a>
+
+        <nav class="nav-list">
+          <button class="nav-item active" type="button" data-view-link="dashboard">
+            <span class="nav-icon" aria-hidden="true">D</span>
+            <span>Dashboard</span>
+          </button>
+          <button class="nav-item" type="button" data-view-link="resumes">
+            <span class="nav-icon" aria-hidden="true">R</span>
+            <span>My Resumes</span>
+          </button>
+          <button class="nav-item" type="button" data-view-link="coverLetters">
+            <span class="nav-icon" aria-hidden="true">C</span>
+            <span>Cover Letters</span>
+          </button>
+          <button class="nav-item" type="button" data-view-link="matcher">
+            <span class="nav-icon" aria-hidden="true">M</span>
+            <span>Job Matcher</span>
+          </button>
+          <button class="nav-item" type="button" data-view-link="ats">
+            <span class="nav-icon" aria-hidden="true">A</span>
+            <span>ATS Score</span>
+          </button>
+          <button class="nav-item" type="button" data-view-link="savedJobs">
+            <span class="nav-icon" aria-hidden="true">S</span>
+            <span>Saved Jobs</span>
+          </button>
+          <button class="nav-item" type="button" data-view-link="billing">
+            <span class="nav-icon" aria-hidden="true">B</span>
+            <span>Billing</span>
+          </button>
+          <button class="nav-item" type="button" data-view-link="settings">
+            <span class="nav-icon" aria-hidden="true">G</span>
+            <span>Settings</span>
+          </button>
+        </nav>
+
+        <button class="nav-item logout-button" type="button" id="logoutButton">
+          <span class="nav-icon" aria-hidden="true">L</span>
+          <span>Logout</span>
+        </button>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <button class="mobile-menu" type="button" id="mobileMenu" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <button class="cloud-button" type="button" id="syncButton" aria-label="Sync dashboard">
+            <span aria-hidden="true">Sync</span>
+          </button>
+        </header>
+
+        <section class="view active" id="view-dashboard" aria-labelledby="dashboardTitle">
+          <div class="page-intro">
+            <div>
+              <h2 id="dashboardTitle">Welcome back, <span id="userFirstName">John</span>!</h2>
+              <p>Let's get closer to your dream job today.</p>
+            </div>
+          </div>
+
+          <section class="stats-grid" aria-label="Career metrics">
+            <article class="metric-card">
+              <span class="metric-icon" aria-hidden="true">R</span>
+              <div>
+                <p>Resumes</p>
+                <strong id="resumeCount">0</strong>
+              </div>
+            </article>
+            <article class="metric-card">
+              <span class="metric-icon" aria-hidden="true">C</span>
+              <div>
+                <p>Cover Letters</p>
+                <strong id="coverLetterCount">0</strong>
+              </div>
+            </article>
+            <article class="metric-card">
+              <span class="metric-icon" aria-hidden="true">A</span>
+              <div>
+                <p>ATS Score</p>
+                <strong id="averageAts">0%</strong>
+              </div>
+            </article>
+            <article class="metric-card">
+              <span class="metric-icon" aria-hidden="true">J</span>
+              <div>
+                <p>Jobs Matched</p>
+                <strong id="matchedJobsCount">0</strong>
+              </div>
+            </article>
+          </section>
+
+          <div class="dashboard-grid">
+            <section class="panel recent-panel" aria-labelledby="recentTitle">
+              <div class="panel-heading">
+                <h3 id="recentTitle">Recent Documents</h3>
+                <button class="text-button" type="button" data-view-link="resumes">View all</button>
+              </div>
+              <div class="document-list" id="recentDocuments"></div>
+            </section>
+
+            <section class="panel quick-panel" aria-labelledby="quickTitle">
+              <h3 id="quickTitle">Quick Actions</h3>
+              <div class="quick-actions">
+                <button class="primary-action" type="button" data-action="create-resume">
+                  <span aria-hidden="true">+</span>
+                  Create New Resume
+                </button>
+                <button class="secondary-action" type="button" data-action="generate-cover">
+                  Generate Cover Letter
+                </button>
+                <button class="secondary-action" type="button" data-action="check-ats">
+                  Check ATS Score
+                </button>
+                <button class="secondary-action" type="button" data-action="find-jobs">
+                  Find Job Matches
+                </button>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="view-resumes" aria-labelledby="resumesTitle">
+          <div class="view-header">
+            <div>
+              <h2 id="resumesTitle">My Resumes</h2>
+              <p>Create, edit, duplicate, and score your resumes.</p>
+            </div>
+            <button class="primary-action compact" type="button" data-action="create-resume">New Resume</button>
+          </div>
+          <div class="toolbar">
+            <input id="resumeSearch" type="search" placeholder="Search resumes" />
+            <select id="resumeSort" aria-label="Sort resumes">
+              <option value="recent">Recently updated</option>
+              <option value="score">Highest ATS score</option>
+              <option value="title">Title A-Z</option>
+            </select>
+          </div>
+          <div class="cards-grid" id="resumeCards"></div>
+        </section>
+
+        <section class="view" id="view-coverLetters" aria-labelledby="coverTitle">
+          <div class="view-header">
+            <div>
+              <h2 id="coverTitle">Cover Letters</h2>
+              <p>Generate tailored letters from any saved resume.</p>
+            </div>
+            <button class="primary-action compact" type="button" data-action="generate-cover">Generate</button>
+          </div>
+          <div class="cards-grid" id="coverLetterCards"></div>
+        </section>
+
+        <section class="view" id="view-matcher" aria-labelledby="matcherTitle">
+          <div class="view-header">
+            <div>
+              <h2 id="matcherTitle">Job Matcher</h2>
+              <p>Compare your resumes against open roles.</p>
+            </div>
+            <button class="primary-action compact" type="button" data-action="find-jobs">Find Matches</button>
+          </div>
+          <div class="toolbar">
+            <input id="jobSearch" type="search" placeholder="Search jobs" />
+            <select id="matchFilter" aria-label="Filter job matches">
+              <option value="all">All matches</option>
+              <option value="high">80% and above</option>
+              <option value="saved">Saved jobs</option>
+            </select>
+          </div>
+          <div class="job-list" id="jobList"></div>
+        </section>
+
+        <section class="view" id="view-ats" aria-labelledby="atsTitle">
+          <div class="view-header">
+            <div>
+              <h2 id="atsTitle">ATS Score</h2>
+              <p>Spot keyword gaps and formatting risks before applying.</p>
+            </div>
+            <button class="primary-action compact" type="button" data-action="check-ats">Check Score</button>
+          </div>
+          <div class="ats-board">
+            <div class="score-ring" id="scoreRing">
+              <span id="scoreRingValue">0%</span>
+            </div>
+            <div class="panel">
+              <h3>Latest Recommendations</h3>
+              <ul class="insight-list" id="atsInsights"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="view-savedJobs" aria-labelledby="savedTitle">
+          <div class="view-header">
+            <div>
+              <h2 id="savedTitle">Saved Jobs</h2>
+              <p>Track roles you want to apply for.</p>
+            </div>
+          </div>
+          <div class="job-list" id="savedJobList"></div>
+        </section>
+
+        <section class="view" id="view-billing" aria-labelledby="billingTitle">
+          <div class="view-header">
+            <div>
+              <h2 id="billingTitle">Billing</h2>
+              <p>Manage plan details and usage.</p>
+            </div>
+          </div>
+          <div class="billing-layout">
+            <article class="panel plan-panel">
+              <p class="eyebrow">Current plan</p>
+              <h3>CareerAI Pro</h3>
+              <p>Unlimited resumes, cover letters, ATS checks, and job matches.</p>
+              <strong>$19 / month</strong>
+              <button class="secondary-action" type="button" id="togglePlanButton">Pause Plan</button>
+            </article>
+            <article class="panel usage-panel">
+              <h3>Usage This Month</h3>
+              <div class="usage-row"><span>Resumes</span><progress max="30" value="12"></progress></div>
+              <div class="usage-row"><span>Cover letters</span><progress max="30" value="8"></progress></div>
+              <div class="usage-row"><span>ATS checks</span><progress max="50" value="18"></progress></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="view-settings" aria-labelledby="settingsTitle">
+          <div class="view-header">
+            <div>
+              <h2 id="settingsTitle">Settings</h2>
+              <p>Personalize your dashboard and profile.</p>
+            </div>
+          </div>
+          <form class="settings-form panel" id="settingsForm">
+            <label>
+              Full name
+              <input id="fullNameInput" type="text" autocomplete="name" />
+            </label>
+            <label>
+              Target role
+              <input id="targetRoleInput" type="text" />
+            </label>
+            <label>
+              Email alerts
+              <select id="emailAlertsInput">
+                <option value="daily">Daily digest</option>
+                <option value="weekly">Weekly digest</option>
+                <option value="none">No alerts</option>
+              </select>
+            </label>
+            <button class="primary-action compact" type="submit">Save Settings</button>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+
+    <dialog class="modal" id="resumeModal">
+      <form method="dialog" class="modal-card" id="resumeForm">
+        <div class="modal-heading">
+          <h3>Create Resume</h3>
+          <button class="icon-button" type="button" data-close-modal="resumeModal" aria-label="Close">x</button>
+        </div>
+        <label>
+          Resume title
+          <input id="resumeTitleInput" type="text" required placeholder="Frontend Developer Resume" />
+        </label>
+        <label>
+          Target role
+          <input id="resumeRoleInput" type="text" required placeholder="Software Engineer" />
+        </label>
+        <label>
+          Skills
+          <textarea id="resumeSkillsInput" required placeholder="React, TypeScript, APIs, testing"></textarea>
+        </label>
+        <menu class="modal-actions">
+          <button class="secondary-action compact" type="button" data-close-modal="resumeModal">Cancel</button>
+          <button class="primary-action compact" type="submit">Create</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <dialog class="modal" id="coverModal">
+      <form method="dialog" class="modal-card" id="coverForm">
+        <div class="modal-heading">
+          <h3>Generate Cover Letter</h3>
+          <button class="icon-button" type="button" data-close-modal="coverModal" aria-label="Close">x</button>
+        </div>
+        <label>
+          Company
+          <input id="coverCompanyInput" type="text" required placeholder="Acme Inc" />
+        </label>
+        <label>
+          Job title
+          <input id="coverRoleInput" type="text" required placeholder="Product Manager" />
+        </label>
+        <label>
+          Highlight
+          <textarea id="coverHighlightInput" required placeholder="I led a dashboard redesign that improved conversion by 18%."></textarea>
+        </label>
+        <menu class="modal-actions">
+          <button class="secondary-action compact" type="button" data-close-modal="coverModal">Cancel</button>
+          <button class="primary-action compact" type="submit">Generate</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <dialog class="modal" id="atsModal">
+      <form method="dialog" class="modal-card" id="atsForm">
+        <div class="modal-heading">
+          <h3>Check ATS Score</h3>
+          <button class="icon-button" type="button" data-close-modal="atsModal" aria-label="Close">x</button>
+        </div>
+        <label>
+          Resume text
+          <textarea id="atsResumeInput" required placeholder="Paste resume text here"></textarea>
+        </label>
+        <label>
+          Job keywords
+          <input id="atsKeywordsInput" type="text" required placeholder="React, leadership, analytics, SQL" />
+        </label>
+        <menu class="modal-actions">
+          <button class="secondary-action compact" type="button" data-close-modal="atsModal">Cancel</button>
+          <button class="primary-action compact" type="submit">Score Resume</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <dialog class="modal" id="jobModal">
+      <form method="dialog" class="modal-card" id="jobForm">
+        <div class="modal-heading">
+          <h3>Find Job Matches</h3>
+          <button class="icon-button" type="button" data-close-modal="jobModal" aria-label="Close">x</button>
+        </div>
+        <label>
+          Target role
+          <input id="jobRoleInput" type="text" required placeholder="Data Analyst" />
+        </label>
+        <label>
+          Location
+          <input id="jobLocationInput" type="text" required placeholder="Remote" />
+        </label>
+        <label>
+          Skills
+          <textarea id="jobSkillsInput" required placeholder="SQL, Tableau, Python, stakeholder reporting"></textarea>
+        </label>
+        <menu class="modal-actions">
+          <button class="secondary-action compact" type="button" data-close-modal="jobModal">Cancel</button>
+          <button class="primary-action compact" type="submit">Match Jobs</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="supabase-client.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
