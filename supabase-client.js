@@ -11,12 +11,12 @@
   };
 
   const toAppState = ({ profile, resumes, coverLetters, jobs, atsResult }) => ({
-    user: {
-      fullName: profile?.full_name || "John Carter",
-      targetRole: profile?.target_role || "Software Engineer",
-      emailAlerts: profile?.email_alerts || "daily",
-      planPaused: profile?.plan_paused || false
-    },
+      user: {
+        fullName: profile?.full_name || "John Carter",
+        targetRole: profile?.target_role || "Software Engineer",
+        emailAlerts: profile?.email_alerts || "daily",
+        planStatus: profile?.plan_status || (profile?.plan_paused ? "paused" : "free")
+      },
     resumes: resumes.map((resume) => ({
       id: resume.id,
       title: resume.title,
@@ -62,7 +62,8 @@
         full_name: state.user.fullName,
         target_role: state.user.targetRole,
         email_alerts: state.user.emailAlerts,
-        plan_paused: state.user.planPaused
+        plan_status: state.user.planStatus || "free",
+        plan_paused: state.user.planStatus === "paused"
       },
       resumes: state.resumes.map((resume) => ({
         id: remoteId(resume.id, userId),
@@ -139,7 +140,8 @@
           full_name: defaultState.user.fullName,
           target_role: defaultState.user.targetRole,
           email_alerts: defaultState.user.emailAlerts,
-          plan_paused: defaultState.user.planPaused
+          plan_status: defaultState.user.planStatus || "free",
+          plan_paused: defaultState.user.planStatus === "paused"
         })
       );
 
@@ -215,6 +217,7 @@
             full_name: fullName,
             target_role: "Software Engineer",
             email_alerts: "daily",
+            plan_status: "free",
             plan_paused: false
           })
         );

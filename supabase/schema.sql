@@ -9,6 +9,7 @@ create table if not exists public.profiles (
   full_name text not null default 'John Carter',
   target_role text not null default 'Software Engineer',
   email_alerts text not null default 'daily',
+  plan_status text not null default 'free' check (plan_status in ('free', 'pro', 'paused')),
   plan_paused boolean not null default false,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()

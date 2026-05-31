@@ -47,8 +47,194 @@ button {
   min-height: 100vh;
 }
 
-body.auth-active .app-shell {
+body.auth-active .app-shell,
+body.landing-active .app-shell {
   display: none;
+}
+
+.landing-screen {
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(10, 12, 31, 0.76), rgba(6, 8, 18, 0.94)),
+    radial-gradient(circle at 78% 42%, rgba(105, 74, 245, 0.24), transparent 28%),
+    #070a16;
+  color: #fff;
+}
+
+.landing-screen.active {
+  display: block;
+}
+
+.landing-nav {
+  display: grid;
+  grid-template-columns: 180px 1fr auto;
+  align-items: center;
+  gap: 28px;
+  min-height: 96px;
+  width: min(1120px, calc(100% - 44px));
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.landing-links {
+  display: flex;
+  justify-content: center;
+  gap: 34px;
+}
+
+.landing-links a,
+.hero-secondary {
+  color: #c6cbdd;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.landing-actions,
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.dark-action {
+  border-color: rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.landing-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.75fr);
+  gap: 64px;
+  align-items: center;
+  width: min(1120px, calc(100% - 44px));
+  min-height: calc(100vh - 96px);
+  margin: 0 auto;
+  padding: 62px 0 84px;
+}
+
+.landing-copy h2 {
+  max-width: 720px;
+  margin-bottom: 28px;
+  color: #fff;
+  font-size: clamp(2.9rem, 7vw, 5.7rem);
+  line-height: 1.12;
+}
+
+.landing-copy h2 span {
+  color: #7d63ff;
+}
+
+.landing-copy > p {
+  max-width: 620px;
+  color: #bfc4d8;
+  font-size: 1.22rem;
+  font-weight: 700;
+  line-height: 1.8;
+}
+
+.hero-actions {
+  margin: 34px 0 30px;
+}
+
+.hero-primary,
+.hero-secondary {
+  min-width: 190px;
+  min-height: 58px;
+}
+
+.hero-secondary {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: transparent;
+  color: #fff;
+}
+
+.social-proof {
+  color: #888fa7 !important;
+  font-size: 1rem !important;
+}
+
+.resume-preview {
+  position: relative;
+  display: grid;
+  gap: 20px;
+  min-height: 450px;
+  border-radius: 10px;
+  padding: 38px 34px;
+  background: #fff;
+  color: #202333;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.42);
+  transform: rotate(9deg);
+}
+
+.resume-preview strong,
+.resume-preview span,
+.resume-preview small {
+  display: block;
+}
+
+.resume-preview > div:first-child span {
+  margin: 8px 0;
+  color: var(--primary);
+  font-weight: 800;
+}
+
+.preview-score {
+  position: absolute;
+  top: 54px;
+  right: 38px;
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  border: 8px solid #35c978;
+  border-radius: 50%;
+  color: #1d2436;
+  font-size: 1.7rem;
+  font-weight: 900;
+}
+
+.preview-score small {
+  font-size: 0.7rem;
+  color: #788096;
+}
+
+.resume-preview section {
+  display: grid;
+  gap: 9px;
+}
+
+.resume-preview section h3 {
+  color: #68718b;
+  font-size: 0.82rem;
+}
+
+.resume-preview section span {
+  height: 10px;
+  border-radius: 999px;
+  background: #eceef6;
+}
+
+.resume-preview section span:last-child {
+  width: 68%;
+}
+
+.landing-band {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.landing-band article {
+  padding: 36px min(5vw, 64px);
+  background: rgba(9, 11, 25, 0.86);
+}
+
+.landing-band p {
+  margin-bottom: 0;
+  color: #aeb5ca;
 }
 
 .auth-screen {
@@ -408,7 +594,6 @@ body.auth-active .app-shell {
 .brand-lockup {
   display: flex;
   align-items: center;
-  gap: 10px;
   margin: 0 6px 44px;
   color: #f1efff;
   font-weight: 700;
@@ -416,8 +601,7 @@ body.auth-active .app-shell {
 }
 
 .brand-icon,
-.nav-icon,
-.metric-icon {
+.nav-icon {
   display: inline-grid;
   place-items: center;
   flex: 0 0 auto;
@@ -440,7 +624,6 @@ body.auth-active .app-shell {
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 12px;
   width: 100%;
   min-height: 44px;
   border: 0;
@@ -463,14 +646,6 @@ body.auth-active .app-shell {
   background: linear-gradient(135deg, #6546f2, #4e31df);
   color: #fff;
   box-shadow: 0 12px 28px rgba(79, 49, 223, 0.36);
-}
-
-.nav-icon {
-  width: 24px;
-  height: 24px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  font-size: 0.72rem;
 }
 
 .logout-button {
@@ -581,32 +756,36 @@ h3 {
 }
 
 .metric-card {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  min-height: 112px;
+  position: relative;
+  display: block;
+  min-height: 126px;
   border-radius: 8px;
-  padding: 22px 24px;
+  padding: 24px 26px;
+  overflow: hidden;
 }
 
-.metric-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: var(--primary-soft);
-  color: var(--primary);
-  font-weight: 800;
+.metric-card::after {
+  content: "";
+  position: absolute;
+  right: 22px;
+  bottom: 18px;
+  width: 58px;
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(86, 53, 232, 0.22), rgba(20, 167, 108, 0.24));
 }
 
 .metric-card p {
-  margin-bottom: 6px;
-  color: var(--muted);
-  font-size: 0.86rem;
-  font-weight: 700;
+  margin-bottom: 18px;
+  color: #555c73;
+  font-size: 0.95rem;
+  font-weight: 800;
 }
 
 .metric-card strong {
-  font-size: 1.72rem;
+  display: block;
+  color: #111525;
+  font-size: 2.45rem;
   line-height: 1;
 }
 
@@ -954,9 +1133,12 @@ label {
 .empty-state {
   border: 1px dashed #d4d7e7;
   border-radius: 8px;
-  padding: 24px;
-  color: var(--muted);
+  padding: 34px 28px;
+  background: linear-gradient(180deg, #ffffff, #fafaff);
+  color: #697087;
   text-align: center;
+  font-weight: 800;
+  line-height: 1.6;
 }
 
 @keyframes fadeIn {
@@ -971,6 +1153,23 @@ label {
 }
 
 @media (max-width: 1040px) {
+  .landing-nav {
+    grid-template-columns: 1fr auto;
+  }
+
+  .landing-links {
+    display: none;
+  }
+
+  .landing-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-preview {
+    width: min(460px, 90%);
+    margin: 0 auto;
+  }
+
   .stats-grid,
   .dashboard-grid,
   .ats-board,
@@ -984,6 +1183,35 @@ label {
 }
 
 @media (max-width: 760px) {
+  .landing-nav {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 22px 0;
+  }
+
+  .landing-actions,
+  .hero-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .landing-hero {
+    min-height: auto;
+    padding: 44px 0 60px;
+  }
+
+  .landing-copy h2 {
+    font-size: 2.85rem;
+  }
+
+  .resume-preview {
+    transform: rotate(0deg);
+  }
+
+  .landing-band {
+    grid-template-columns: 1fr;
+  }
+
   .auth-screen.active {
     grid-template-columns: 1fr;
   }

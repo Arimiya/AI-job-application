@@ -5,91 +5,19 @@ const defaultState = {
     fullName: "John Carter",
     targetRole: "Software Engineer",
     emailAlerts: "daily",
-    planPaused: false
+    planStatus: "free"
   },
-  resumes: [
-    {
-      id: "resume-1",
-      title: "Software Engineer Resume",
-      role: "Software Engineer",
-      skills: ["React", "TypeScript", "Node.js", "Testing"],
-      score: 92,
-      updatedAt: Date.now() - 2 * 24 * 60 * 60 * 1000
-    },
-    {
-      id: "resume-2",
-      title: "Product Manager Resume",
-      role: "Product Manager",
-      skills: ["Roadmaps", "Analytics", "Stakeholders", "Launches"],
-      score: 88,
-      updatedAt: Date.now() - 5 * 24 * 60 * 60 * 1000
-    },
-    {
-      id: "resume-3",
-      title: "Data Analyst Resume",
-      role: "Data Analyst",
-      skills: ["SQL", "Python", "Dashboards", "Forecasting"],
-      score: 75,
-      updatedAt: Date.now() - 30 * 24 * 60 * 60 * 1000
-    }
-  ],
-  coverLetters: [
-    {
-      id: "cover-1",
-      company: "Nimbus Labs",
-      role: "Frontend Engineer",
-      highlight: "Built accessible product dashboards for high-volume teams.",
-      createdAt: Date.now() - 1 * 24 * 60 * 60 * 1000
-    },
-    {
-      id: "cover-2",
-      company: "AtlasWorks",
-      role: "Product Manager",
-      highlight: "Led cross-functional launches from discovery through adoption.",
-      createdAt: Date.now() - 4 * 24 * 60 * 60 * 1000
-    }
-  ],
-  jobs: [
-    {
-      id: "job-1",
-      title: "Senior Software Engineer",
-      company: "Cloudlane",
-      location: "Remote",
-      match: 91,
-      saved: true,
-      skills: ["React", "APIs", "Testing"]
-    },
-    {
-      id: "job-2",
-      title: "Product Manager",
-      company: "Brightpath",
-      location: "New York, NY",
-      match: 86,
-      saved: false,
-      skills: ["Roadmaps", "Analytics", "Stakeholders"]
-    },
-    {
-      id: "job-3",
-      title: "Data Analyst",
-      company: "Signal Ridge",
-      location: "Remote",
-      match: 78,
-      saved: true,
-      skills: ["SQL", "Python", "Dashboards"]
-    }
-  ],
+  resumes: [],
+  coverLetters: [],
+  jobs: [],
   ats: {
-    score: 85,
-    insights: [
-      "Add more role-specific keywords from the job description.",
-      "Keep bullets measurable with outcomes and numbers.",
-      "Use simple section headings so parsing tools can read the resume."
-    ]
+    score: 0,
+    insights: []
   }
 };
 
 let state = loadState();
-let activeView = "signup";
+let activeView = "landing";
 let database = null;
 let remoteSaveTimer = null;
 let authReady = false;
@@ -99,12 +27,40 @@ const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)
 
 function loadState() {
   try {
+    if (localStorage.getItem("careerai-demo-seed-cleared") !== "true") {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.setItem("careerai-demo-seed-cleared", "true");
+    }
     const saved = localStorage.getItem(STORAGE_KEY);
     if (!saved) return structuredClone(defaultState);
-    return { ...structuredClone(defaultState), ...JSON.parse(saved) };
+    const parsed = JSON.parse(saved);
+    if (hasOldDemoSeed(parsed)) {
+      localStorage.removeItem(STORAGE_KEY);
+      return structuredClone(defaultState);
+    }
+    return {
+      ...structuredClone(defaultState),
+      ...parsed,
+      user: {
+        ...structuredClone(defaultState).user,
+        ...parsed.user,
+        planStatus: parsed.user?.planStatus || (parsed.user?.planPaused ? "paused" : "free")
+      }
+    };
   } catch {
     return structuredClone(defaultState);
   }
+}
+
+function hasOldDemoSeed(value) {
+  const oldResumeIds = new Set(["resume-1", "resume-2", "resume-3"]);
+  const oldCoverIds = new Set(["cover-1", "cover-2"]);
+  const oldJobIds = new Set(["job-1", "job-2", "job-3"]);
+  return Boolean(
+    value?.resumes?.some((item) => oldResumeIds.has(item.id)) ||
+      value?.coverLetters?.some((item) => oldCoverIds.has(item.id)) ||
+      value?.jobs?.some((item) => oldJobIds.has(item.id))
+  );
 }
 
 function saveState() {
@@ -160,6 +116,7 @@ function setActiveView(viewName) {
     item.classList.toggle("active", item.dataset.viewLink === viewName);
   });
   document.body.classList.toggle("auth-active", viewName === "signup" || viewName === "login");
+  document.body.classList.toggle("landing-active", viewName === "landing");
   document.body.classList.remove("nav-open");
   render();
 }
@@ -311,7 +268,9 @@ function renderAts() {
   const score = state.ats.score;
   ring.style.setProperty("--score", `${score * 3.6}deg`);
   qs("#scoreRingValue").textContent = `${score}%`;
-  qs("#atsInsights").innerHTML = state.ats.insights.map((insight) => `<li>${escapeHtml(insight)}</li>`).join("");
+  qs("#atsInsights").innerHTML = state.ats.insights.length
+    ? state.ats.insights.map((insight) => `<li>${escapeHtml(insight)}</li>`).join("")
+    : `<li>No ATS check yet. Run your first score from Quick Actions.</li>`;
 }
 
 function renderSettings() {
@@ -321,7 +280,20 @@ function renderSettings() {
 }
 
 function renderBilling() {
-  qs("#togglePlanButton").textContent = state.user.planPaused ? "Resume Plan" : "Pause Plan";
+  const status = state.user.planStatus || "free";
+  const isPro = status === "pro";
+  const isPaused = status === "paused";
+  qs("#planName").textContent = isPro ? "CareerAI Pro" : isPaused ? "Plan Paused" : "Free Plan";
+  qs("#planDescription").textContent = isPro
+    ? "Unlimited resumes, cover letters, ATS checks, and job matches."
+    : isPaused
+      ? "Your subscription is paused. Resume when you're ready."
+      : "Start with resume building, cover letter generation, ATS checks, and job matching.";
+  qs("#planPrice").textContent = isPro ? "$19 / month" : "$0 / month";
+  qs("#togglePlanButton").textContent = isPro ? "Pause Plan" : "Upgrade Plan";
+  qs("#resumeUsage").value = state.resumes.length;
+  qs("#coverUsage").value = state.coverLetters.length;
+  qs("#atsUsage").value = state.ats.score > 0 ? 1 : 0;
 }
 
 function makeCoverLetter(letter) {
@@ -467,10 +439,10 @@ function bindEvents() {
   qs("#savedJobList").addEventListener("click", handleJobActions);
 
   qs("#togglePlanButton").addEventListener("click", () => {
-    state.user.planPaused = !state.user.planPaused;
+    state.user.planStatus = state.user.planStatus === "pro" ? "paused" : "pro";
     saveState();
     renderBilling();
-    showToast(state.user.planPaused ? "Plan paused" : "Plan resumed");
+    showToast(state.user.planStatus === "pro" ? "Plan upgraded" : "Plan paused");
   });
 
   qs("#settingsForm").addEventListener("submit", (event) => {
@@ -661,14 +633,14 @@ function handleJobActions(event) {
 }
 
 bindEvents();
-setActiveView("signup");
+setActiveView("landing");
 initializeSupabase();
 
 async function initializeSupabase() {
   try {
     database = await window.CareerAISupabase?.create?.();
     if (!database) {
-      showToast("Supabase not configured. Auth screens use demo mode.");
+      showToast("Supabase not configured. You can use demo mode.");
       return;
     }
 
